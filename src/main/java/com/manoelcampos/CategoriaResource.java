@@ -1,7 +1,11 @@
 package com.manoelcampos;
 
 import com.manoelcampos.model.Categoria;
+import io.quarkus.hibernate.orm.panache.runtime.JpaOperations;
+import io.vertx.core.net.JksOptions;
 
+import javax.persistence.OptimisticLockException;
+import javax.swing.text.html.Option;
 import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -33,9 +37,21 @@ public class CategoriaResource {
     @Transactional
     @POST
     public void insert(Categoria categoria) {
-        System.out.println(categoria);
-        var em = Categoria.getEntityManager();
-        em.persist(categoria);
+        Categoria.persist(categoria);
+
+    }
+
+    @Transactional
+    @Path("/{id}")
+    @PUT
+    public void update( @PathParam("id") Long id,Categoria categoria) {
+
+        try {
+            var  em = JpaOperations.INSTANCE.getEntityManager();
+            em.merge(categoria);
+        }catch (OptimisticLockException e){
+            throw new WebApplicationException("Registro alterado por outro usuario");
+        }
     }
 
 }
