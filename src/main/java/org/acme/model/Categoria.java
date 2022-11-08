@@ -1,8 +1,6 @@
-package com.manoelcampos.model;
+package org.acme.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import io.quarkus.hibernate.orm.panache.PanacheEntity;
-import org.hibernate.tuple.entity.AbstractEntityBasedAttribute;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,6 +12,8 @@ import java.util.List;
 @Entity
 public class Categoria extends AbstractEntity{
     @Version
+    @Column(columnDefinition = "int default 0")
+    public long version =0L;
 
 
     @JsonIgnore

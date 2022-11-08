@@ -1,4 +1,4 @@
-package com.manoelcampos.model;
+package org.acme.model;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 

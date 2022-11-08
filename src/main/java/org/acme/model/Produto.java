@@ -1,12 +1,17 @@
-package com.manoelcampos.model;
+package org.acme.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-import java.io.ObjectInputStream;
+import javax.persistence.Version;
 import java.util.Objects;
 
 @Entity
 public class Produto extends AbstractEntity{
+
+    @Version
+    @Column(columnDefinition = "int default 0")
+    public long version = 0L;
     public String nome;
 
     @ManyToOne

@@ -1,11 +1,9 @@
-package com.manoelcampos;
+package org.acme.controller;
 
-import com.manoelcampos.model.Categoria;
+import org.acme.model.Categoria;
 import io.quarkus.hibernate.orm.panache.runtime.JpaOperations;
-import io.vertx.core.net.JksOptions;
 
 import javax.persistence.OptimisticLockException;
-import javax.swing.text.html.Option;
 import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -53,5 +51,6 @@ public class CategoriaResource {
             throw new WebApplicationException("Registro alterado por outro usuario");
         }
     }
+
 
 }
